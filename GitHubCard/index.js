@@ -6,8 +6,9 @@ import axios from "axios";
 */
 axios.get(' https://api.github.com/users/cannen-hanzik')
   .then(res => {
-    console.log(res)
+    document.querySelector('.cards').appendChild(gitCard(res.data));
   })
+  .catch(err => console.error(err))
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
     github info! You will need to understand the structure of this
@@ -15,7 +16,49 @@ axios.get(' https://api.github.com/users/cannen-hanzik')
 
     Skip to STEP 3 (line 34).
 */
+function gitCard(information) {
+  const card = document.createElement('div');
+  const img = document.createElement('img');
+  const cardInfo = document.createElement('div');
+  const name = document.createElement('h3');
+  const login = document.createElement('p');
+  const location = document.createElement('p');
+  const profile = document.createElement('p');
+  const profileLink = document.createElement('a');
+  const followers = document.createElement('p');
+  const following = document.createElement('p');
+  const bio = document.createElement('p');
+  
+  card.classList.add('card');
+  cardInfo.classList.add('card-info');
+  name.classList.add('name');
+  login.classList.add('username'); 
 
+  img.src = information.avatar_url;
+  img.alt = 'github user';
+  name.textContent = information.name;
+  login.textContent = information.login;
+  location.textContent = information.location;
+  profile.textContent = 'Profile: \n';
+  profileLink.textContent = 'Link to profile';
+  profileLink.href = information.html_url;
+  followers.textContent = `Followers: ${information.followers}`;
+  following.textContent = `Following ${information.following}`;
+  bio.textContent = information.bio;
+
+  card.appendChild(img);
+  card.appendChild(cardInfo);
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(login);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(profileLink);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
+
+  return card;
+}
 /*
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
