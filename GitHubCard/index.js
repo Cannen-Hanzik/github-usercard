@@ -4,7 +4,7 @@ import axios from "axios";
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-const followersArray = [/*'cannen-hanzik',*/ 'tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell'] ;
+const followersArray = [/*'cannen-hanzik',*/ 'tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell', 'CRHarding'] ;
 
 for (let i = 0; i < followersArray.length; i++){
   getGit(followersArray[i]);
